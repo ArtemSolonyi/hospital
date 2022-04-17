@@ -1,0 +1,11 @@
+<% if can? :read, @patient %>
+  <%=@patient.diagnose %>
+  <h>Профиль пациента</h>
+  <%= current_user.phone_number %>
+  <% if @patient.diagnose %>
+    <%= @patient.diagnose %>
+  <% end %>
+
+
+
+<% end %>

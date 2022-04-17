@@ -1,20 +1,26 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Hospital</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title>Hospital</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
-  </head>
-  <% if current_user %>
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= javascript_importmap_tags %>
+</head>
+
+<% if current_user %>
   <%= button_to "Logout", destroy_user_session_path, method: :delete %>
-<%else %>
-  <%=link_to "LOGIN", new_user_session_path %>
-<%end %>
-  <body>
-    <%= yield %>
-  </body>
+
+    <%= link_to "profile pat", patient_profile_path %>
+
+  <%= link_to "profile doctor", doctor_profile_path %>
+<% else %>
+  <%= link_to "LOGIN", new_user_session_path %>
+<% end %>
+
+<body>
+<%= yield %>
+</body>
 </html>
