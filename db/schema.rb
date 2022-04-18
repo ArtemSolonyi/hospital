@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_17_174500) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_18_191820) do
   create_table "appointments", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -24,12 +24,18 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_17_174500) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "doctor_id"
+    t.index ["doctor_id"], name: "index_categories_on_doctor_id"
   end
 
   create_table "doctors", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
+    t.integer "patient_id"
+    t.integer "category_id"
+    t.index ["category_id"], name: "index_doctors_on_category_id"
+    t.index ["patient_id"], name: "index_doctors_on_patient_id"
     t.index ["user_id"], name: "index_doctors_on_user_id"
   end
 
@@ -38,7 +44,21 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_17_174500) do
     t.datetime "updated_at", null: false
     t.integer "user_id"
     t.string "diagnose"
+    t.integer "doctor_id"
+    t.integer "recommendation_id"
+    t.index ["doctor_id"], name: "index_patients_on_doctor_id"
+    t.index ["recommendation_id"], name: "index_patients_on_recommendation_id"
     t.index ["user_id"], name: "index_patients_on_user_id"
+  end
+
+  create_table "recommendations", force: :cascade do |t|
+    t.string "recommendation"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "doctor_id"
+    t.integer "patient_id"
+    t.index ["doctor_id"], name: "index_recommendations_on_doctor_id"
+    t.index ["patient_id"], name: "index_recommendations_on_patient_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -60,8 +80,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_17_174500) do
 
   add_foreign_key "appointments", "doctors"
   add_foreign_key "appointments", "patients"
+  add_foreign_key "categories", "doctors"
+  add_foreign_key "doctors", "categories"
+  add_foreign_key "doctors", "patients"
   add_foreign_key "doctors", "users"
+  add_foreign_key "patients", "doctors"
+  add_foreign_key "patients", "recommendations"
   add_foreign_key "patients", "users"
+  add_foreign_key "recommendations", "doctors"
+  add_foreign_key "recommendations", "patients"
   add_foreign_key "users", "doctors"
   add_foreign_key "users", "patients"
 end
