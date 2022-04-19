@@ -1,5 +1,10 @@
 <h>Профиль doctora</h>
 <%= current_user.phone_number %>
 Я могу редачить
+<h3>Записи ко мне: </h3>
+Ном.тел пациента:
+<% @appointments.each do |n| %>
+  <%=get_phone_number(n.patient.user_id)%><br>
+<% end %>
 
 
