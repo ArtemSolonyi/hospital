@@ -3,8 +3,10 @@
 Я могу редачить
 <h3>Записи ко мне: </h3>
 Ном.тел пациента:
-<% @appointments.each do |n| %>
-  <%=get_phone_number(n.patient.user_id)%><br>
+<% if @appointments %>
+  <% @appointments.each do |n| %>
+    <%= get_phone_number(n.patient.user_id) %><br>
+  <% end %>
 <% end %>
-
+<div id="show-doctors"></div>
 

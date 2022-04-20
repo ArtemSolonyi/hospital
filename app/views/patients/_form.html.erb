@@ -1,4 +1,9 @@
-<%= form_with(url: appointment) do |f| %>
-  <%= f.select :doctor_id, Doctor.all.collect { |p| [ p.category.name, p.id ] }, { selected: params[:id] } %>
-  <%=f.submit "Записатся к врачу" %>
+<div data-controller="doctorByCategory" data-doctorByCategory-my-value="/categories" data-action="change->doctorByCategory#greet" data-action="click->doctorByCategory#clear">
+  <%= form_with do |f| %>
+  <%=f.collection_select :id,Category.all,:id,:name,{prompt:'Выберите категорию врача'} %>
 <% end %>
+</div>
+<div data-controller="doctorByCategory" data-action="click->doctorByCategory#clear">
+  <button>Очистить</button>
+</div>
+

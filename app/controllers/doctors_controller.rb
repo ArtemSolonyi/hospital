@@ -7,6 +7,7 @@ class DoctorsController < ApplicationController
   def profile
     @appointments = @doctor.appointments
     authorize! :read, @doctor
+
   end
 
   def create

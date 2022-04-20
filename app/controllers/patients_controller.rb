@@ -6,8 +6,6 @@ class PatientsController < ApplicationController
   end
 
   def profile
-
-    @appointment = Appointment.new
     authorize! :read, @patient
   end
 
@@ -15,7 +13,4 @@ class PatientsController < ApplicationController
     @patient = Patient.find_by(user_id:current_user.id)
   end
 
-  def appointment_params
-    params.require(:appointment).permit(:doctor_id)
-  end
 end
