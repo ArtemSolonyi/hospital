@@ -2,9 +2,19 @@
   <%= @patient.user_id %>
   <h>Профиль пациента</h>
   <%= current_user.phone_number %>
-  <% if @patient.diagnose %>
-    <%= @patient.diagnose %>
-  <% end %>
   <%= render 'form' %>
 <% end %>
 <div id="show-doctors"></div>
+Ваши встречи
+<br>
+
+<div id="patient-appointments">
+  <%# @patient.appointments.each do |n| %>
+    <%#=n.doctor.category.name%>
+    <%#=n.doctor.user.first_name %>
+    <%#=n.doctor.user.last_name %>
+    <%#=n.doctor.user.phone_number %>
+<!--    <br>-->
+  <%# end %>
+</div>
+<div id="added-appointments"> </div>

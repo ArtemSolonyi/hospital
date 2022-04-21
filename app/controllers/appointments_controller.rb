@@ -1,11 +1,24 @@
 class AppointmentsController < ApplicationController
 
   def create
-    patient = Patient.find_by(user_id: current_user.id).id
-    if Doctor.find(params[:doctor_id]).appointments.count < 10
-      Appointment.create!(patient_id: patient, doctor_id: params[:doctor_id])
+    @messages = ''
+    @doctor_id = params[:doctor_id]
+    @appointment = []
+    patient = (Patient.joins(:user).where(patients:{user_id: current_user.id}))[0].id
+    found_appointment = Appointment.exists?(patient_id: patient, doctor_id: @doctor_id)
+
+    if  Doctor.find(@doctor_id).appointments.count < 10 && !found_appointment
+
+      @messages = "Вы успешно записаны"
+      @appointment = Appointment.joins(:patient,:doctor).create!(patient_id: patient, doctor_id: @doctor_id)
+
+    elsif found_appointment
+      @messages = "Вы уже записаны"
     else
-      print("Нельзя больше чем 10")
+      @messages = "Простите, но у доктора всё занято"
+    end
+    respond_to do |format|
+      format.js { render partial: 'layouts/messages' }
     end
   end
 

@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :doctors
   resources :appointments
   resources :categories
-
+  resources :recommendations
   root to: 'home#index'
   get '/patient/profile', to: "patients#profile"
   get '/doctor/profile',to:"doctors#profile"
