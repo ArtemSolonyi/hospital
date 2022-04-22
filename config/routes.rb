@@ -10,7 +10,8 @@ Rails.application.routes.draw do
   root to: 'home#index'
   get '/patient/profile', to: "patients#profile"
   get '/doctor/profile',to:"doctors#profile"
-  get '/doctors',to: "categories#doctors_by_category"
+  post '/appointment/rec',to:"appointments#set_recommendation"
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")

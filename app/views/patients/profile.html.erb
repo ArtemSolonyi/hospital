@@ -1,5 +1,5 @@
+
 <% if can? :read, @patient %>
-  <%= @patient.user_id %>
   <h>Профиль пациента</h>
   <%= current_user.phone_number %>
   <%= render 'form' %>
@@ -7,14 +7,16 @@
 <div id="show-doctors"></div>
 Ваши встречи
 <br>
-
 <div id="patient-appointments">
-  <%# @patient.appointments.each do |n| %>
-    <%#=n.doctor.category.name%>
-    <%#=n.doctor.user.first_name %>
-    <%#=n.doctor.user.last_name %>
-    <%#=n.doctor.user.phone_number %>
-<!--    <br>-->
-  <%# end %>
+  <% if @appointments %>
+    <% @appointments.each do |n| %>
+      <div id="<%= n.doctor_id %>">
+        <%= n.first_name %>
+        <%= n.last_name %>
+        <%= n.phone_number %>
+      <%=(n.get_recommendation(n.doctor_id,@patient.id)).recommendation%>
+    <% end %>
+  <% end %>
+  </div>
 </div>
-<div id="added-appointments"> </div>
+<div id="added-appointments"></div>

@@ -8,10 +8,11 @@ class User < ApplicationRecord
   has_many :doctor, dependent: :destroy
   enum role: [:patient, :doctor, :admin]
 
-  def get_full_name
-    "qq"
-  end
 
+  def get_recommendation(doctor_id,patient_id)
+    rec = Recommendation.find_by(doctor_id:doctor_id,patient_id:patient_id)
+
+  end
 
   after_initialize :set_default_role, if: :new_record?
 

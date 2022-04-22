@@ -1,3 +1,4 @@
+
 <h>Профиль doctora</h>
 <h3>Записи ко мне: </h3>
 Ном.тел пациента:
@@ -7,9 +8,9 @@
     <%=n.first_name %>
     <%=n.last_name %>
     <%=n.phone_number%>
-    <div data-controller="writeRecommendation" data-writeRecommendation-my-value="<%=n.patient_id%>" data-writeRecommendation-my-value2="<%=@doctor.id%>"  data-action="click->writeRecommendation#greet">
-      <textarea></textarea>
-      <button>Отправить рекомендацию</button>
+    <div data-controller="writeRecommendation" data-writeRecommendation-my-value="<%=n.patient_id%>" data-writeRecommendation-my-value2="<%=@doctor.id%>" >
+        <textarea></textarea>
+      <button data-action="click->writeRecommendation#greet">Отправить рекомендацию</button>
     </div>
   <% end %>
 <% end %>
