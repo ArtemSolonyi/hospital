@@ -1,5 +1,5 @@
-
-<% if can? :read, @patient %>
+<%=link_to 'Главная','/' %>
+<% if can? :index, @patient %>
   <h>Профиль пациента</h>
   <%= current_user.phone_number %>
   <%= render 'form' %>
@@ -14,7 +14,7 @@
         <%= n.first_name %>
         <%= n.last_name %>
         <%= n.phone_number %>
-      <%=(n.get_recommendation(n.doctor_id,@patient.id)).recommendation%>
+      <%#=(n.get_recommendation(n.doctor_id,@patient.id)).recommendation%>
     <% end %>
   <% end %>
   </div>

@@ -15,6 +15,7 @@ class PatientsController < ApplicationController
   def set_patient
     @user = current_user
     @patient = Patient.joins(:user).where(patients:{user_id:@user.id})[0]
+
   end
 
 end
