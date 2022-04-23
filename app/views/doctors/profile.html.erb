@@ -1,18 +1,18 @@
-<h>Профиль doctora</h>
-<h3>Записи ко мне: </h3>
-Ном.тел пациента:
-<% if @appointments %>
-  <% @appointments.each do |n| %>
-    <div id="<%=n.patient_id%>">
-    <%=n.first_name %>
-    <%=n.last_name %>
-    <%=n.phone_number%>
-    <div data-controller="writeRecommendation" data-writeRecommendation-my-value="<%=n.patient_id%>" data-writeRecommendation-my-value2="<%=@doctor.id%>" >
-        <textarea></textarea>
-      <button data-action="click->writeRecommendation#greet">Отправить рекомендацию</button>
-    </div>
-  <% end %>
-<% end %>
-</div>
-<div id="show-doctors"></div>
-
+<!--<h>Профиль doctora</h>-->
+<!--<h3>Записи ко мне: </h3>-->
+<!--Ном.тел пациента:-->
+<%# if @appointments %>
+  <%# @appointments.each do |n| %>
+<!--    <div id="<%#=n.patient_id%>">-->
+    <%#=n.first_name %>
+    <%#=n.last_name %>
+    <%#=n.phone_number%>
+<!--    <div data-controller="writeRecommendation" data-writeRecommendation-my-value="<%#=n.patient_id%>" data-writeRecommendation-my-value2="<%#=@doctor.id%>" >-->
+<!--        <textarea></textarea>-->
+<!--      <button data-action="click->writeRecommendation#greet">Отправить рекомендацию</button>-->
+<!--    </div>-->
+  <%# end %>
+<%# end %>
+<!--</div>-->
+<!--<div id="show-doctors"></div>-->
+<%=render 'home/profile_info' %>
