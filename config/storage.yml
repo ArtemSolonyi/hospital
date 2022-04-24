@@ -7,13 +7,13 @@ local:
   root: <%= Rails.root.join("storage") %>
 
 
-digitalocean:
-  service: S3
-  access_key_id: <%= Rails.application.credentials.dig(:digitalocean, :access_key) %>
-  secret_access_key: <%= Rails.application.credentials.dig(:digitalocean, :secret) %>
-  region: nyc3
-  bucket: hospital
-  endpoint: https://hospital.nyc3.digitaloceanspaces.com
+#digitalocean:
+#  service: S3
+#  access_key_id: <%#= Rails.application.credentials.dig(:digitalocean, :access_key) %>
+#  secret_access_key: <%#= Rails.application.credentials.dig(:digitalocean, :secret) %>
+#  region: nyc3
+#  bucket: hospital
+#  endpoint: https://hospital.nyc3.digitaloceanspaces.com
 
 # Remember not to checkin your GCS keyfile to a repository
 # google:
