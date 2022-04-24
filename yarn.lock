@@ -2,6 +2,13 @@
 # yarn lockfile v1
 
 
+"@rails/activestorage@^6.1.5":
+  version "6.1.5"
+  resolved "https://registry.yarnpkg.com/@rails/activestorage/-/activestorage-6.1.5.tgz#a43929573b2ffae54857ffa3b7ac1988af42b681"
+  integrity sha512-7L0eWqrguZIyvfPOpVoZRChuIgxbpBdwdVtprT6wrl5rUAbdyHr6AZczl1yS+5d6nBV0TqpVLaB1sGxi2aMbCQ==
+  dependencies:
+    spark-md5 "^3.0.0"
+
 bootstrap@^5.1.3:
   version "5.1.3"
   resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-5.1.3.tgz#ba081b0c130f810fa70900acbc1c6d3c28fa8f34"
@@ -16,3 +23,8 @@ popper.js@^1.16.1:
   version "1.16.1"
   resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.16.1.tgz#2a223cb3dc7b6213d740e40372be40de43e65b1b"
   integrity sha512-Wb4p1J4zyFTbM+u6WuO4XstYx4Ky9Cewe4DWrel7B0w6VVICvPwdOpotjzcf6eD8TsckVnIMNONQyPIUFOUbCQ==
+
+spark-md5@^3.0.0:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/spark-md5/-/spark-md5-3.0.2.tgz#7952c4a30784347abcee73268e473b9c0167e3fc"
+  integrity sha512-wcFzz9cDfbuqe0FZzfi2or1sgyIrsDwmPwfZC4hiNidPdPINjeUwNfv5kldczoEAcjl9Y1L3SM7Uz2PUEQzxQw==
