@@ -3,7 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  # has_one_attached :avatar
+  has_one_attached :avatar
   has_many :patient, dependent: :destroy
   has_many :doctor, dependent: :destroy
   enum role: [:patient, :doctor, :admin]

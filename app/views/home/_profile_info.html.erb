@@ -26,7 +26,7 @@
           </div>
         </div>
       </div>
-      <form class="card-h">
+      <%= form_with(model: @user, url: registration_path(@user), html: { method: :put }, class: 'card-h') do |f| %>
         <div class="card-h-header">
           <h3 class="card-title">My Profile</h3>
         </div>
@@ -51,14 +51,14 @@
             <input placeholder="you@domain.com" value="<%= @user.email %>" class="form-control">
           </div>
           <div class="form-group">
-            <label class="form-label">Phone nfumber</label>
+            <label class="form-label">Phone number</label>
             <input type="" value="<%= @user.phone_number %>" class="form-control">
           </div>
         </div>
         <div class="card-footer text-right">
           <button class="btn btn-primary">Save</button>
         </div>
-      </form>
+      <% end %>
     </div>
 
     <% if can? :read, @doctor %>

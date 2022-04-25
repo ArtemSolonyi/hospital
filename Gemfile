@@ -77,4 +77,4 @@ end
 gem 'devise'
 gem 'cancancan'
 gem 'activeadmin'
-gem 'aws-sdk-s3','~>1'
+gem 'aws-sdk-s3', '~> 1.111', '>= 1.111.1'
