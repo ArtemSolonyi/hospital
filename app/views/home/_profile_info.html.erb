@@ -4,10 +4,10 @@
       <div class="card-h card-h-profile">
         <div style="background-image: url(https://demo.bootstrapious.com/admin-premium/1-4-5/img/photos/paul-morris-116514-unsplash.jpg);" class="card-header"></div>
         <div class="card-body text-center">
-          <img src="https://bootdey.com/img/Content/avatar/avatar2.png" class="card-h-profile-img">
+          <span style="background-image: url(<%= avatar_for(@user) %>)" class="avatar avatar-xxl mr-7"></span>
           <% if can? :read, @patient %>
             <h3 class="mb-3"><%= @user.first_name %> <%= @user.last_name %></h3>
-            <p class="mb-4">Пациент</p>
+            <h3 class="mb-4">Patient</h3>
           <% end %>
           <% if can? :read, @doctor %>
             <h3 class="mb-3"><%= @user.first_name %> <%= @user.last_name %></h3>
@@ -18,48 +18,49 @@
       </div>
       <div class="card-h">
         <div class="card-body">
-          <div class="media">
-            <span style="background-image: url(https://bootdey.com/img/Content/avatar/avatar2.png)" class="avatar avatar-xl mr-3"></span>
-            <div class="media-body">
-              <h4>John Doe</h4>
+          <%= form_with(model: @user, url: registration_path(@user), html: { method: :put },) do |f| %>
+            <span style="background-image: url(<%= avatar_for(@user) %>)" class="avatar avatar-xl mr-3"> <%= f.file_field :avatar, direct_upload: true, style: 'all: none; position: relative;
+padding-left: 100px;' %></span>
+            <%= f.submit "Отправить" %>
+          <% end %>
+
+          <%= form_with(model: @user, url: registration_path(@user), html: { method: :put },) do |f| %>
             </div>
-          </div>
-        </div>
-      </div>
-      <%= form_with(model: @user, url: registration_path(@user), html: { method: :put }, class: 'card-h') do |f| %>
-        <div class="card-h-header">
-          <h3 class="card-title">My Profile</h3>
-        </div>
-        <div class="card-body">
-          <div class="row mb-3">
-            <div class="col-auto d-flex align-items-center">
-              <span style="background-image: url(https://bootdey.com/img/Content/avatar/avatar2.png)" class="avatar avatar-lg"></span>
             </div>
-            <div class="col">
-              <div class="form-group">
-                <label class="form-label">First Name</label>
-                <input placeholder="First name" value="<%= @user.first_name %>" class="form-control">
+            <div class="card-h">
+              <div class="card-h-header">
+                <h3 class="card-title">My Profile</h3>
               </div>
-            </div>
+              <div class="card-body">
+                <div class="row mb-3">
+
+                  <div class="col">
+                    <div class="form-group">
+                      <label class="form-label">First Name</label>
+                      <%= f.text_field :first_name, placeholder: "First name", value: @user.first_name, class: "form-control" %>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Last Name</label>
+                  <%= f.text_field :last_name, placeholder: "Last name", value: @user.last_name, class: "form-control" %>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Email</label>
+                  <%= f.email_field :email, placeholder: "email@examle.com", value: @user.email, class: "form-control" %>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Phone number</label>
+                  <%= f.telephone_field :phone_number, placeholder: "+38(000-000-000)", value: @user.phone_number, class: "form-control" %>
+                </div>
+              </div>
+              <div class="card-footer text-right">
+                <button class="btn btn-primary">Save</button>
+              </div>
+              <%= render "devise/shared/error_messages", resource: @user %>
+          <% end %>
           </div>
-          <div class="form-group">
-            <label class="form-label">Last Name</label>
-            <input placeholder="Last name" value="<%= @user.last_name %>" class="form-control">
           </div>
-          <div class="form-group">
-            <label class="form-label">Email</label>
-            <input placeholder="you@domain.com" value="<%= @user.email %>" class="form-control">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Phone number</label>
-            <input type="" value="<%= @user.phone_number %>" class="form-control">
-          </div>
-        </div>
-        <div class="card-footer text-right">
-          <button class="btn btn-primary">Save</button>
-        </div>
-      <% end %>
-    </div>
 
     <% if can? :read, @doctor %>
       <div class="col-lg-8">
