@@ -16,7 +16,6 @@ RSpec.feature "Doctor can" do
     doctor.save
     Appointment.create!(patient_id: patient.id, doctor_id: doctor.id)
     visit '/'
-    click_link 'LOGIN'
     fill_in 'user[phone_number]', :with => user.phone_number
     fill_in 'user[password]', :with => user.password
     click_button "Log in"
