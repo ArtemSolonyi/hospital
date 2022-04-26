@@ -11,7 +11,7 @@
           <% end %>
           <% if can? :read, @doctor %>
             <h3 class="mb-3"><%= @user.first_name %> <%= @user.last_name %></h3>
-            <p class="mb-4">Доктор</p>
+            <p class="mb-4">Doctor</p>
             <p class="mb-4"><%= @doctor.category.name %></p>
           <% end %>
         </div>
@@ -22,7 +22,7 @@
           <%= form_with(model: @user, url: registration_path(@user), html: { method: :put },) do |f| %>
             <span style="background-image: url(<%= avatar_for(@user) %>)" class="avatar avatar-xl mr-3"> <%= f.file_field :avatar, direct_upload: true, style: 'all: none; position: relative;
 padding-left: 100px;' %></span>
-            <%= f.submit "Отправить" %>
+            <%= f.submit "Upload avatar" %>
           <% end %>
 
           <%= form_with(model: @user, url: registration_path(@user), html: { method: :put },) do |f| %>
@@ -63,7 +63,7 @@ padding-left: 100px;' %></span>
           </div>
           </div>
     <div class="col-lg-8">
-      <%= link_to 'Главная', '/' %>
+      <%= link_to 'Home', '/' %>
       <% if can? :read, @doctor %>
         <% if @appointments %>
           <% @appointments.each do |user| %>
@@ -72,7 +72,7 @@ padding-left: 100px;' %></span>
                 <div class="additional">
                   <div class="user-card">
                     <div class="points center">
-                      Пациент
+                      Patient
                     </div>
                     <img src="<%= avatar_for(user) %>" class="img-fluid d-block mx-auto rounded-circle img-thumbnail mb-4">
                   </div>
@@ -91,8 +91,7 @@ padding-left: 100px;' %></span>
                       <div data-controller="writeRecommendation" data-writeRecommendation-my-value="<%= user.patient_id %>" data-writeRecommendation-my-value2="<%= @doctor.id %>">
                         <textarea cols="26" rows="2"></textarea>
                         <center>
-                          <button class="send-rec " data-action="click->writeRecommendation#greet">Отправить
-                            рекомендацию
+                          <button class="send-rec" data-action="click->writeRecommendation#greet">Send recommendation
                           </button>
                         </center>
                       </div>
@@ -121,7 +120,7 @@ padding-left: 100px;' %></span>
                   <div class="additional">
                     <div class="user-card">
                       <div class="level center">
-                        Врач
+                        Doctor
                       </div>
                       <div class="points center">
                         <%= user.doctor[0].category.name %>
@@ -136,19 +135,19 @@ padding-left: 100px;' %></span>
                       </div>
                       <% if !user.get_recommendation(user.doctor_id, @patient.id) %>
                         <div class="coords">
-                          <span>В ожидании рекомендации врача</span>
+                          <span>Awaiting doctor's recommendation</span>
                         </div>
                         <div class="coords">
                           <span>Status</span>
-                          <span style="color:yellow">Сеанс начат</span>
+                          <span style="color:yellow">Session started</span>
                         </div>
                       <% else %>
                         <div class="coords">
                           <span>Status</span>
-                          <span style="color:red">Сеанс окончен</span>
+                          <span style="color:red">Session ended</span>
                         </div>
                         <div class="coords">
-                          <span>Рекомендация от врача:<br><%= (user.get_recommendation(user.doctor_id, @patient.id)) %></span>
+                          <span>Recommendations from doctor:<br><%= (user.get_recommendation(user.doctor_id, @patient.id)) %></span>
                         </div>
                       <% end %>
                     </div>
