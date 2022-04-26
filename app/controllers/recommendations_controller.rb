@@ -1,7 +1,10 @@
 class RecommendationsController < ApplicationController
 
   def create
-    Patient.find(params[:patient_id]).recommendations.create!(recommendation:params[:recommendation],doctor_id:params[:doctor_id])
+    patient = params[:patient_id]
+    doctor = params[:doctor_id]
+    Patient.find(patient).recommendations.create!(recommendation:params[:recommendation],doctor_id:doctor)
+
   end
 
 end

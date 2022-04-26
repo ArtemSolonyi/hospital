@@ -15,6 +15,7 @@
             <p class="mb-4"><%= @doctor.category.name %></p>
           <% end %>
         </div>
+
       </div>
       <div class="card-h">
         <div class="card-body">
@@ -61,30 +62,33 @@ padding-left: 100px;' %></span>
           <% end %>
           </div>
           </div>
-
-    <% if can? :read, @doctor %>
-      <div class="col-lg-8">
+    <div class="col-lg-8">
+      <%= link_to 'Главная', '/' %>
+      <% if can? :read, @doctor %>
         <% if @appointments %>
-          <% @appointments.each do |n| %>
-            <div id="<%= n.patient_id %>">
+          <% @appointments.each do |user| %>
+            <div id="<%= user.patient_id %>">
               <div class="card green">
                 <div class="additional">
                   <div class="user-card">
                     <div class="points center">
                       Пациент
                     </div>
-                    <img src="https://bootdey.com/img/Content/avatar/avatar6.png" class="img-fluid d-block mx-auto rounded-circle img-thumbnail mb-4">
+                    <img src="<%= avatar_for(user) %>" class="img-fluid d-block mx-auto rounded-circle img-thumbnail mb-4">
                   </div>
                   <div class="more-info">
-                    <h1><%= n.first_name %>  <%= n.last_name %></h1>
+                    <h1><%= user.first_name %>  <%= user.last_name %></h1>
                     <div class="coords">
                       <span>Phone Number</span>
-                      <span><%= n.phone_number %></span>
+                      <span><%= user.phone_number %></span>
                     </div>
+
                     <div class="coords">
-                      <span>Email:</span>
-                      <span><%= n.email %></span>
-                      <div data-controller="writeRecommendation" data-writeRecommendation-my-value="<%= n.patient_id %>" data-writeRecommendation-my-value2="<%= @doctor.id %>">
+                      <% if user.email? %>
+                        <span>Email:</span>
+                        <span><%= user.email %></span>
+                      <% end %>
+                      <div data-controller="writeRecommendation" data-writeRecommendation-my-value="<%= user.patient_id %>" data-writeRecommendation-my-value2="<%= @doctor.id %>">
                         <textarea cols="26" rows="2"></textarea>
                         <center>
                           <button class="send-rec " data-action="click->writeRecommendation#greet">Отправить
@@ -99,66 +103,66 @@ padding-left: 100px;' %></span>
             </div>
           <% end %>
         <% end %>
-    <% end %>
+      <% end %>
 
 
 
-    <% if can? :read, @patient %>
-      <div class="col-lg-8" id="column">
-        <%= link_to 'Главная', '/' %>
-        <% if can? :index, @patient %>
-          <%= render 'form' %>
-        <% end %>
-        <div id="show-doctors" class="row"></div>
-        <% if @appointments %>
-          <% @appointments.each do |n| %>
-            <div class="row" id="<%= n.doctor_id %>">
-              <div class="card">
-                <div class="additional">
-                  <div class="user-card">
-                    <div class="level center">
-                      Врач
+      <% if can? :read, @patient %>
+        <div class="col-lg-8" id="column">
+
+          <% if can? :index, @patient %>
+            <%= render 'form' %>
+          <% end %>
+          <div id="show-doctors" class="row"></div>
+          <% if @appointments %>
+            <% @appointments.each do |user| %>
+              <div class="row" id="<%= user.doctor_id %>">
+                <div class="card">
+                  <div class="additional">
+                    <div class="user-card">
+                      <div class="level center">
+                        Врач
+                      </div>
+                      <div class="points center">
+                        <%= user.doctor[0].category.name %>
+                      </div>
+                      <img src="<%= avatar_for(user) %>" class="img-fluid d-block mx-auto rounded-circle img-thumbnail mb-4">
                     </div>
-                    <div class="points center">
-                      <%= n.doctor[0].category.name %>
+                    <div class="more-info">
+                      <h1><%= user.first_name %> <%= user.last_name %></h1>
+                      <div class="coords">
+                        <span>Phone number</span>
+                        <span><%= user.phone_number %></span>
+                      </div>
+                      <% if !user.get_recommendation(user.doctor_id, @patient.id) %>
+                        <div class="coords">
+                          <span>В ожидании рекомендации врача</span>
+                        </div>
+                        <div class="coords">
+                          <span>Status</span>
+                          <span style="color:yellow">Сеанс начат</span>
+                        </div>
+                      <% else %>
+                        <div class="coords">
+                          <span>Status</span>
+                          <span style="color:red">Сеанс окончен</span>
+                        </div>
+                        <div class="coords">
+                          <span>Рекомендация от врача:<br><%= (user.get_recommendation(user.doctor_id, @patient.id)) %></span>
+                        </div>
+                      <% end %>
                     </div>
-                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="img-fluid d-block mx-auto rounded-circle img-thumbnail mb-4">
-                  </div>
-                  <div class="more-info">
-                    <h1><%= n.first_name %> <%= n.last_name %></h1>
-                    <div class="coords">
-                      <span>Phone number</span>
-                      <span><%= n.phone_number %></span>
-                    </div>
-                    <% if !n.get_recommendation(n.doctor_id, @patient.id) %>
-                      <div class="coords">
-                        <span>В ожидании рекомендации врача</span>
-                      </div>
-                      <div class="coords">
-                        <span>Status</span>
-                        <span style="color:yellow">Сеанс начат</span>
-                      </div>
-                    <% else %>
-                      <div class="coords">
-                        <span>Status</span>
-                        <span style="color:red">Сеанс окончен</span>
-                      </div>
-                      <div class="coords">
-                        <span>Рекомендация от врача:<br><%= (n.get_recommendation(n.doctor_id, @patient.id)) %></span>
-                      </div>
-                    <% end %>
                   </div>
                 </div>
               </div>
-            </div>
+            <% end %>
           <% end %>
-        <% end %>
-        <div id="added-appointments" class="row"></div>
-      </div>
-      </div>
+          <div id="added-appointments" class="row"></div>
+        </div>
+        </div>
 
-    <% end %>
-  </div>
+      <% end %>
+      </div>
 </div>
 
 
