@@ -1,6 +1,6 @@
 <div data-controller="doctorByCategory" data-doctorByCategory-my-value="/categories" data-action="change->doctorByCategory#greet" data-action="click->doctorByCategory#clear">
   <%= form_with do |f| %>
-    <%= f.collection_select :id, Category.all, :id, :name, { prompt: 'Выберите категорию врача' } %>
+    <%= f.collection_select :id, Category.all, :id, :name, { prompt: 'Select category of doctor' } %>
   <% end %>
   <div data-action="click->doctorByCategory#clear">
     <button>Clear</button>

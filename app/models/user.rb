@@ -7,6 +7,9 @@ class User < ApplicationRecord
   has_many :patient, dependent: :destroy
   has_many :doctor, dependent: :destroy
   enum role: [:patient, :doctor, :admin]
+  validates :phone_number,uniqueness: true
+  validates_format_of :phone_number,:with =>  /\d[0-9]\)*\z/ , :message => "Only positive number without spaces are allowed"
+
 
   def get_recommendation(doctor_id, patient_id)
     if Recommendation.exists?(doctor_id: doctor_id, patient_id: patient_id)
@@ -19,8 +22,6 @@ class User < ApplicationRecord
     def set_default_role
       self.role ||= :user
     end
-
-    validates :phone_number, uniqueness: true
 
     def email_required?
       false

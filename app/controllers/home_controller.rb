@@ -3,7 +3,13 @@ class HomeController < ApplicationController
   before_action :set_user, only: %i[index]
 
   def index
-
+    if current_user&.patient?
+      redirect_to '/patient/profile'
+    elsif current_user&.doctor?
+      redirect_to '/doctor/profile'
+    else
+      redirect_to '/users/sign_in'
+    end
   end
 
   def create

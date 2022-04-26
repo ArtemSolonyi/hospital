@@ -5,6 +5,9 @@
         <div style="background-image: url(https://demo.bootstrapious.com/admin-premium/1-4-5/img/photos/paul-morris-116514-unsplash.jpg);" class="card-header"></div>
         <div class="card-body text-center">
           <span style="background-image: url(<%= avatar_for(@user) %>)" class="avatar avatar-xxl mr-7"></span>
+          <% if current_user %>
+            <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "btn btn-danger", html: { data: { turbo: false } } %>
+          <% end %>
           <% if can? :read, @patient %>
             <h3 class="mb-3"><%= @user.first_name %> <%= @user.last_name %></h3>
             <h3 class="mb-4">Patient</h3>
@@ -12,7 +15,9 @@
           <% if can? :read, @doctor %>
             <h3 class="mb-3"><%= @user.first_name %> <%= @user.last_name %></h3>
             <p class="mb-4">Doctor</p>
-            <p class="mb-4"><%= @doctor.category.name %></p>
+            <% if @doctor.category %>
+              <p class="mb-4"><%= @doctor.category.name %></p>
+            <% end %>
           <% end %>
         </div>
 
@@ -63,7 +68,8 @@ padding-left: 100px;' %></span>
           </div>
           </div>
     <div class="col-lg-8">
-      <%= link_to 'Home', '/' %>
+
+
       <% if can? :read, @doctor %>
         <% if @appointments %>
           <% @appointments.each do |user| %>
@@ -89,7 +95,7 @@ padding-left: 100px;' %></span>
                         <span><%= user.email %></span>
                       <% end %>
                       <div data-controller="writeRecommendation" data-writeRecommendation-my-value="<%= user.patient_id %>" data-writeRecommendation-my-value2="<%= @doctor.id %>">
-                        <textarea cols="26" rows="2"></textarea>
+                        <textarea name="send_recommendation" cols="26" rows="2"></textarea>
                         <center>
                           <button class="send-rec" data-action="click->writeRecommendation#greet">Send recommendation
                           </button>
@@ -159,7 +165,6 @@ padding-left: 100px;' %></span>
           <div id="added-appointments" class="row"></div>
         </div>
         </div>
-
       <% end %>
       </div>
 </div>

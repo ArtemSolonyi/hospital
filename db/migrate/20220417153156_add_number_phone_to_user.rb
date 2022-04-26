@@ -1,5 +1,5 @@
 class AddNumberPhoneToUser < ActiveRecord::Migration[7.0]
   def change
-    add_column :users, :phone_number,:string
+    add_column :users, :phone_number,:string,unique: true
   end
 end
