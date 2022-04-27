@@ -79,6 +79,6 @@ gem "image_processing", "~> 1.2"
  
  ## Project is deployed to
 
- Heroku: https://safe-sea-96714.herokuapp.com
+ Heroku: https://hospital-personal-project.herokuapp.com
 
 
