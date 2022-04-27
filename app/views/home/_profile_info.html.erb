@@ -68,8 +68,6 @@ padding-left: 100px;' %></span>
           </div>
           </div>
     <div class="col-lg-8">
-
-
       <% if can? :read, @doctor %>
         <% if @appointments %>
           <% @appointments.each do |user| %>
@@ -109,8 +107,6 @@ padding-left: 100px;' %></span>
           <% end %>
         <% end %>
       <% end %>
-
-
 
       <% if can? :read, @patient %>
         <div class="col-lg-8" id="column">
